@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=clicker+script & family=fredoka+one & family=PT')
+/* css variables */
+:root{
+    --font:'clicker script',cursive;
+    --blue:rgb(10, 13, 235)!important;
+    --black:#000 !important;
+    --grey:#f1f1f1 !important;
+    --txt:'PT sans',sans-serif;
+    --title:'fredoka one',cursive;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-szing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    position: relative;
+    overflow-x: hidden;
+}
+i,button{
+    cursor: pointer;
+}
+/** custom scroll-bar **/
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px #cfcaca;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(to bottom,rgba(199,3,255,1),rgba(95,3,255,1));
+    border-radius: 10px;
+}
+nav{
+    height: 80px;
+    width: 100%;
+    background: #8df15e;
+}
+label.logo{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(238, 83, 204);
+    padding: 0 100px;
+    line-height: 80px;
+}
+nav ul{
+    float: right;
+    margin-right: 40px;
+}
+nav li{
+    display: inline-block;
+    margin: 0 8px;
+    line-height: 50px;
+}
+nav a{
+    color: rgb(236, 68, 228);
+    font-size: 20px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 3px;
+}
+nav #icon{
+    color: rgb(235, 59, 220);
+    font-size: 20px;
+    line-height: 80px;
+    float: right;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+@media (max-width: 1048px){
+    label.logo{
+        font-size: 22px;
+        padding-left: 60px;
+    }
+    nav ul{
+        margin-right: 20px;
+    }
+    nav a{
+        font-size: 22px;
+    }
+}
+@media (max-width: 909px){
+    nav #icon{
+        display: block;
+    }
+    nav ul{
+        position: fixed;
+        width: 70%;
+        height: 80vh;
+        top: 80px;
+        left: -60;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav li{
+        display: block;
+        margin: 20px 0;
+        line-height: 20px;
+    }
+    nav a{
+        font-size: 20px;
+    }
+    a.active,a:hover{
+        border: none;
+        color: #e61edc;
+    }
+    nav ul.show{
+        left: 0;
+    }
+}
+.my-link-style:hover{
+    text-decoration: underline;
+}
+.my-link-style:hover{
+    text-decoration: underline;
+}
+.navbar{
+    background-color: rgb(85, 238, 71);
+}
+.nav-brand,.nav-brand:hover{
+    text-decoration: none;
+    font-family: var(--font);
+    color: #fff;
+    font-weight: bolder;
+    text-shadow: 0px 1px 1px #000;
+}
+.nav-brand span{
+    color: var(--cyan);
+}
+.nav-link{
+    color: #ac1a6f;
+    font-size: 18px;
+    font-family: var(--title);
+    text-shadow: 0px 1px 1px #000;
+}
+.navbar-toggler{
+    border: none !important;
+    outline: none !important;
+    font-size: 30px !important;
+}
+.navbar-toggler i{
+    color: #fff;
+}
+.active::after{
+    content: '';
+    position: absolute;
+    background-repeat: no-repeat;
+    transform: translate(-170%, -30%);
+}
+.active::before{
+    content: '';
+    position: absolute;
+    width: 75px;
+    height: 7px;
+    
+}
+#home{
+    padding-top: 20px;
+    background-color: rgb(53, 183, 235);
+    background: linear-gradient(0deg,rgba(95,3,255,1)100%);
+}
+#home .input-group-append{
+    margin-left: -18px
+    z-index: 12;
+    box-shadow: 1px 2px 3px #000;
+}
+.explore{
+    border: none!important;
+    outline:none!important;
+    background: linear-gradient(0deg, rgb(70, 233, 119)0% rgb(226, 218, 228)100%);
+}
+.explore:focus{
+    background-color:rgb(255, 255, 255);
+    border-color:rgb(0, 149, 112)!important;
+    outline:none;
+    z-index:-1;
+    box-shadow:0000.2rem rgb(89,0,149,0,404)!important;
+}
+.form-control:focus{
+    color: #ec1cec;
+    background-color: rgb(140, 248, 38)!important;
+    outline:none;
+    z-index:-1;
+    box-shadow:0000.2rem rgba(75, 5, 110, 0.404)!important;
+}
+.title{
+    color: #fff;
+    text-shadow: 1px 2px 3px rgb(14, 13, 13);
+    font-family: var(--title);
+}
+.sub-title{
+    font-family: var(--title);
+}
+.social-media i{
+    color: rgb(255,255,255);
+    cursor: pointer;
+}
+.social-media li{
+    list-style: none;
+}
+.social-media{
+    font-size: 33px;
+}
+/* About */
+#about,#feature{
+    padding-top: 20px;
+}
+.gallary-pic-1{
+    border-radius: 15px !important;
+    height: 360px !important;
+    background-image: url('https://d8bts3h50jb8y.cloudfront.net//smsimg27//PV/IngimageContributors/ing_19032_01340.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.Visit{
+    border: none !important;
+    outline: none !important;
+    background: linear-gradient(0deg,rgba(95,3,255,1)0%,rgba(199,3,255,1)100%);
+}
+.Visit:focus{
+    background-color: #fff;
+    border-color: rgb(90,0,149)!important;
+    outline: none;
+    z-index: -1;
+    box-shadow: 0000.2rem rgb(201,157,255,1)!important;
+}
+.galleryone > div,.gallerysecond > div,.galleryThird > div{
+    border-radius: 15px !important;
+    height: 300px !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition:.3s;
+    cursor: pointer;
+}
+.galleryone > div:hover,.gallerysecond > div:hover,.galleryThird > div:hover{
+    transform: scale(1.1);
+    box-shadow:2px 6px 5px black;
+}
+.galleryone > div:nth-child(1){
+    background-image: url("https://www.k4fashion.com/wp-content/uploads/2020/08/Gujrati-Bridal-Hairstyles-1.jpg")
+}
+.galleryone > div:nth-child(2){
+    background-image: url("https://miro.medium.com/max/1200/0*REoURIPnBAnQ6KvD.jpg");
+}
+.gallerysecond > div:nth-child(1){
+    background-image: url("https://crayon.pk/wp-content/uploads/2019/06/Bewildering-Gujarati-Bridal-Mehndi-Designs-for-right-backhand.jpg");
+}
+.gallerysecond > div:nth-child(2){
+    background-image: url("http://deisysuarez.com/wp-content/uploads/2020/09/1561_22-Easy-Homemade-Cucumber-Face-Mask-Recipes-To-Nourish-Skin_368500046.jpg");
+}
+.gallerysecond > div:nth-child(3){
+    background-image: url("https://media.weddingz.in/images/42d98c494f3bea79d49f66cc62d5c389/yRCSrRuEZ1HQhJNu2Xqb_3-rT4ASE7Ii6fflFTW3BuNMqCkUM6tV4cdDmPLqU6KAywuM9r5P0vpmq6APCk3AvBrEBdn67RajDZH3BdpaCa0IB6F-PPKgvrW1uN-59QVqjEmAds_o.jpg");
+}
+/*Features*/
+.gallery-pic-2{
+    border-radius: 15px !important;
+    height: 360px !important;
+    background-image: url("https://beleza.culturamix.com/blog/wp-content/gallery/Benef%C3%ADcios-da-Vitamina-C-7/Benef%C3%ADcios-da-Vitamina-C-17.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -110px 0px;
+}
+.galleryThird > div:nth-child(1){
+    background-image: url("https://pbs.twimg.com/media/DgPi4kPV4AAkGyI.jpg");
+}
+.galleryThird > div:nth-child(2){
+    background-image: url("https://ego-alterego.com/wp-content/uploads/2018/07/Awesome-moody-lifestyle-portrait-photography-by-Mark-Singerman1.jpg");
+}
+.galleryThird > div:nth-child(3){
+    background-image: url("https://e4p7c9i3.stackpathcdn.com/wp-content/uploads/2018/06/marksingerman_29716481_861627937371150_6419856796092989440_n.jpg?iv=165");
+}
+.card-deck .card{
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.card-deck .bridal{
+    background-image: url('../image/istockphoto-1051999102-612x612.jpg');
+}
+.card-deck .face{
+    background-image: url(https://www.top4.com.au/custom/domain_1/image_files/7632_photo_413802.jpg);
+    background-position-x: -90px;
+}
+.card-deck .Hair-style{
+    background-image: url(https://www.stylecraze.com/wp-content/uploads/2013/11/66-50-Bridal-Hairstyle-Ideas-For-Your-Reception-ss.jpg);
+}
+.card-deck .body-massage{
+    background-image: url(https://dubaisavers.com/wp-content/uploads/2021/01/sweet-lily.jpg);
+    background-position-x: -90px;
+}
+#services,#contact{
+    padding-top:80px;
+}
+/* contact */
+.foot-media i{
+    font-size: 28px;
+}
+/* footer */
+footer a{
+    color: #fff;
+    margin: 0 10px;
+}
+footer a:hover{
+    color: black;
+}
+/* Animation */
+@keyframes tada
+{
+    0% {
+        -webkit-transform: scale3d(1,1,1);
+        transform: scale3d(1,1,1);
+    }
+    10%, 20% {
+        -webkit-transform: scale3d(.95,.95,.95)rotate3d(0,0,1,-10deg);
+        transform: scale3d(.95,.95,.95)rotate3d(0,0,1,-10deg);
+    }
+    30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1,1,1)rotate3d(0,0,1,10deg);
+        transform: scale3d(1,1,1)rotate3d(0,0,1,10deg);
+    }
+    40%, 60%, 80% {
+        -webkit-transform: rotate3d(0,0,1,-10deg);
+        transition: rotate3d (0,0,1,-10deg);
+    }
+    100% {
+        -webkit-transform: scale3d(1,1,1);
+        transform: scale3d(1,1,1);
+    }
+}
+/* Media Query */
+@media only screen and (max-width:600px){
+    .boder-left-0 p{
+        font-size: 18px;
+    }
+    .logo{
+        padding: 24px 10px;
+        z-index: 100;
+    }
+    .custom-logo::after{
+        content: ' ';
+        position: absolute;
+        top: 0;
+        transform: translateX(-85%);
+        padding: 0px 10px;
+        height: 0px;
+        width: 160px;
+        animation: customizelogo.5s linear forwards 1;
+        background-color: rgb(145, 240, 57) ;
+        clip-path: polygon(0 0 100% 0%, 100% 94%, 50% 100%, 0% 94%);
+        z-index: -1;
+    }
+    /* navigation animation */
+    @keyframes customizelogo{
+        from{
+            height: 0px;
+            padding: 0px 10px;
+        }
+        to{
+            height: 537 px;
+            padding: 20px 10px;
+        }
+    }
+}
+    .collapse{
+        display: block !important;
+        background-image: linear-gradient(to bottom,rgb(45, 255, 3),rgb(24, 255, 3));
+        position: absolute;
+        top: 78px;
+        margin-left: 12px;
+        padding-left: 35px;
+        text-align: center;
+        width: 150px;
+        height: 0px;
+        transition: .5s;
+        z-index: 0;
+        clip-path: polygon(0 0 100% 0%, 100% 94%, 50% 100%, 0% 94%);
+    }
+    .custom-collapse{
+        height: 450px;
+    }
+@media only screen and(min-width:992px){
+    .navbar-nav li{
+        margin: 0;
+    }
+}
