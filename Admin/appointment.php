@@ -2,11 +2,9 @@
 <?php include 'inc/left-sidebar.php'; ?>
 <?php include '../halpers/formet.php'; ?>
 <?php include '../classes/appointment.php'; ?>
-
-
 <div class="col-sm-10">
     <div class="card border-dark mh-600">
-        <h1 class="mb-0 alert alert-info"><strong>All Contact Messages</strong></h1>
+        <h1 class="mb-0 alert alert-info"><strong>All Appointment</strong></h1>
         <?php
         $cat = new Appointments();
         if (isset($_GET['delid'])) {
