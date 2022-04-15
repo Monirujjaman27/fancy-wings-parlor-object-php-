@@ -5,7 +5,11 @@
 
 <div class="col-sm-10">
   <div class="card border-dark mh-600">
-    <h1 class="mb-0 alert alert-info"><strong>All services</strong></h1>
+    <h6 class="mb-0 alert alert-info"><strong>Services</strong>
+      <a href="addService.php" class="btn btn-info">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        New Service</a>
+    </h1>
     <?php
     $service = new Service();
     if (isset($_GET['delid'])) {
@@ -22,7 +26,8 @@
           <tr class='w-100'>
             <th>No</th>
             <th>Service Name</th>
-            <th>Service Image</th>
+            <th>Price</th>
+            <th>Image</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -37,7 +42,8 @@
               <tr>
                 <td><?= $i ?></td>
                 <td><?= ucwords($result['name']); ?></td>
-                <td><img class='' height="50" width="50" src="upload/<?= $result['image']; ?>" alt="<?= $result['image']; ?>"></td>
+                <td><?= $result['price'] ?></td>
+                <td><img class='' height="50" width="50" src="<?= $result['image']; ?>" alt="<?= $result['image']; ?>"></td>
                 <td>
                   <span>
                     <a href="editService.php?id=<?= base64_encode($result['id']); ?>">Edit</a> ||
@@ -50,7 +56,6 @@
         </tbody>
       </table>
     </div>
-    <di class="m-2">
-      <a href="addService.php" class="btn btn-info">Add New Service</a>
+
   </div>
   <?php include 'inc/footer.php'; ?>

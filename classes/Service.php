@@ -17,6 +17,8 @@ class Service
     {
         $name = $this->fm->validation($req['name']);
         $name = mysqli_real_escape_string($this->db->link, $name);
+        $price = $this->fm->validation($req['price']);
+        $price = mysqli_real_escape_string($this->db->link, $price);
 
         $permited  = array('jpg', 'jepg', 'png', 'gif');
         $file_name = $file['image']['name'];
@@ -38,16 +40,15 @@ class Service
             return $msg;
         } else {
             move_uploaded_file($file_temp, $upload_image);
-            $query = "INSERT INTO services(name, image) VALUES ('$name','$unique_image')";
+            $query = "INSERT INTO services(name, price, image) VALUES ('$name','$price','$upload_image')";
             $result = $this->db->insert($query);
             if ($result) {
-                $msg = "<p class='mb-0 alert alert-success'>Insert Success</p>";
-                return $msg;
                 $name = '';
                 $file = '';
-            } else {
-                $msg = '<p class="mb-0 text-warning">There Was Something Wrong to Insert the Service</p>';
-                return $msg;
+                session::set('success', 'Service Create Successfully');
+                header("Location:service.php");
+            } else {;
+                session::set('warning', 'There Was Something Wrong to Update');
             }
         }
     }
@@ -80,11 +81,10 @@ class Service
                 $query = "UPDATE services SET name = '$name' WHERE id = '$id'";
                 $result = $this->db->update($query);
                 if ($result) {
-                    $msg = "<p class='mb-0 alert alert-success'>update Success</p>";
-                    return $msg;
+                    session::set('success', 'Service Update Successfully');
+                    header("Location:service.php");
                 } else {
-                    $msg = '<p class="mb-0 text-warning">There Was Something Wrong to update</p>';
-                    return $msg;
+                    session::set('warning', 'There Was Something Wrong to Update');
                 }
             }
         } else {
@@ -97,17 +97,16 @@ class Service
                 return $msg;
             } else {
                 move_uploaded_file($file_temp, $upload_image);
-                if (file_exists("upload/" . $oldImage)) {
-                    unlink("upload/" . $oldImage);
+                if (file_exists($oldImage)) {
+                    unlink($oldImage);
                 }
-                $query = "UPDATE services SET name = '$name', image = '$unique_image' WHERE id = '$id'";
+                $query = "UPDATE services SET name = '$name', image = '$upload_image' WHERE id = '$id'";
                 $result = $this->db->update($query);
                 if ($result) {
-                    $msg = "<p class='mb-0 alert alert-success'>Update Success</p>";
-                    return $msg;
+                    header("Location:service.php");
+                    session::set('success', 'Service Update Successfully');
                 } else {
-                    $msg = '<p class="mb-0 text-warning">There Was Something Wrong to Update</p>';
-                    return $msg;
+                    session::set('warning', 'There Was Something Wrong to Update');
                 }
             }
         }
@@ -123,7 +122,7 @@ class Service
     public function del($gatId)
 
     {
-        $database = mysqli_connect('localhost', 'root', '', 'parlor');
+        $database = mysqli_connect('localhost', 'root', '', 'p1');
         $quary = "SELECT * FROM services where id = '$gatId'";
         $quaryData = mysqli_query($database, $quary);
         if (mysqli_num_rows($quaryData) > 0) {
@@ -132,14 +131,12 @@ class Service
                 $delquery = "DELETE FROM services WHERE id = '$gatId'";
                 $deldata = $this->db->delete($delquery);
                 if ($deldata) {
-                    if (file_exists("upload/" . $queryImage)) {
-                        unlink("upload/" . $queryImage);
+                    if (file_exists($queryImage)) {
+                        unlink($queryImage);
                     }
-                    $msg = "<p class='mb-0 alert alert-success'>Delete Success</p>";
-                    return $msg;
+                    session::set('success', 'Service Delete Successfully');
                 } else {
-                    $msg = '<p class="mb-0 text-warning">There Was Something Wrong to Delete</p>';
-                    return $msg;
+                    session::set('warning', 'There Was Something Wrong to Update');
                 }
             }
         }

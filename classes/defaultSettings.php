@@ -13,7 +13,7 @@ class defaultSettings
         $this->db = new Database();
         $this->fm = new Format();
     }
-    public function updateDefaults($data)
+    public function updateDefaults($data, $file)
     {
         $title   = $this->fm->validation($data['title']);
         $address   = $this->fm->validation($data['address']);
@@ -26,6 +26,8 @@ class defaultSettings
         $youtube    = $this->fm->validation($data['youtube']);
         $instagram    = $this->fm->validation($data['instagram']);
         $copyright    = $this->fm->validation($data['copyright']);
+        $linkedin    = $this->fm->validation($data['linkedin']);
+        $fb_page    = $this->fm->validation($data['fb_page']);
 
         $title   = mysqli_real_escape_string($this->db->link, $title);
         $address   = mysqli_real_escape_string($this->db->link, $address);
@@ -38,16 +40,31 @@ class defaultSettings
         $youtube    = mysqli_real_escape_string($this->db->link, $youtube);
         $instagram    = mysqli_real_escape_string($this->db->link, $instagram);
         $copyright    = mysqli_real_escape_string($this->db->link, $copyright);
-
+        $copyright    = mysqli_real_escape_string($this->db->link, $copyright);
+        $linkedin    = mysqli_real_escape_string($this->db->link, $linkedin);
+        $fb_page    = mysqli_real_escape_string($this->db->link, $fb_page);
 
         if ($title == '' || $address == '' || $phone == '' || $email == '' || $google == '' || $fb == '' || $twitter == '' || $about == '' || $instagram == '' || $copyright == '') {
             $msg = 'All Filed is Required';
             return $msg;
         } else {
-            $query = "UPDATE default_setting SET title = '$title', address = '$address', phone = '$phone', email = '$email', google = '$google', fb = '$fb', twitter = '$twitter', about = '$about', youtube = '$youtube', instagram = '$instagram', copyright = '$copyright' where id = 1";
+            $query = "UPDATE default_setting SET 
+            title = '$title', 
+            address = '$address',
+            phone = '$phone',
+            email = '$email',
+            google = '$google',
+            fb = '$fb',
+            twitter = '$twitter',
+            about = '$about',
+            youtube = '$youtube',
+            instagram = '$instagram',
+            copyright = '$copyright',
+            linkedin = '$linkedin',
+            fb_page = '$fb_page'
+            where id = 1";
             $result = $this->db->update($query);
             if ($result) {
-                $msg = "<p class='mb-0 alert alert-success'>Update Success</p>";
                 $title = '';
                 $address = '';
                 $phone = '';
@@ -57,19 +74,17 @@ class defaultSettings
                 $twitter = '';
                 $instagram = '';
                 $about = '';
-                return $msg;
+                session::set('success', 'Update Successfully');
             } else {
-                $msg = '<p class="mb-0 text-danger">There Was Something Wrong</p>';
-                return $msg;
+                session::set('warning', 'There Was Something Wrong');
             }
         }
     }
 
-    public function showById()
+    public function showById($id)
     {
-        $query = "SELECT * FROM default LIMIT 1";
-        $result = $this->db->selectSingle($query);
-        echo $result;
+        $query = "SELECT * FROM default_setting LIMIT 1";
+        $result = $this->db->select($query);
         return $result;
     }
 }

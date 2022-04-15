@@ -3,7 +3,7 @@
 <?php include '../classes/appointment.php'; ?>
 
 <?php
-$database = mysqli_connect('localhost', 'root', '', 'parlor');
+$database = mysqli_connect('localhost', 'root', '', 'p1');
 $appointMentQuary = "SELECT * From appointment ORDER BY id DESC";
 $contactQuary = "SELECT * From contactmessage ORDER BY id DESC";
 $serviceQuary = "SELECT * From services ORDER BY id DESC";

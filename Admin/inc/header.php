@@ -14,8 +14,10 @@ Session::checkSession();
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Icons/Glyphs -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Parlor Admin Panel</title>
+  <link rel="icon" href="../assets/images/logo.jpg" type="image/gif" sizes="16x16">
+  <title>Admin Panel</title>
 </head>
 
 <body class="dashboard-body">
@@ -23,7 +25,9 @@ Session::checkSession();
     <nav class="m-0">
       <div class="row mx-3">
         <div class="col-sm-8">
-          <h1 class="float-left">Dashboard</h1>
+          <a href="../index.php">
+            <img src="../assets/images/logo.jpg" class="img-thumbnail" width="30px" alt=" logo">
+          </a>
         </div>
         <div class="col-sm-4">
           <ul class="header-top-menue d-flex float-right mt-2">
@@ -40,3 +44,28 @@ Session::checkSession();
       </div>
     </nav>
   </header>
+
+  <?php
+  if (isset($_GET['action']) && $_GET['action'] == 'delete-success') {
+    session::set('success', '');
+  } elseif (isset($_GET['action']) && $_GET['action'] == 'delete-warning') {
+    session::set('warning', '');
+  }
+  ?>
+
+  <?php if (isset($_SESSION['success']) && $_SESSION['success'] !== '') { ?>
+    <div class="alert alert-success alert-dismissible fade show text-capitalize">
+      <?= $_SESSION['success'] ?>
+      <a href="?action=delete-success" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </a>
+    </div>
+  <?php } ?>
+  <?php if (isset($_SESSION['warning']) && $_SESSION['warning'] !== '') { ?>
+    <div class="alert alert-warning alert-dismissible fade show">
+      <?= session::get('warning') ?>
+      <a href="?action=delete-warning" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </a>
+    </div>
+  <?php } ?>

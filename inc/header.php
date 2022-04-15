@@ -3,106 +3,178 @@ include 'lib/session.php';
 session::init();
 include 'lib/database.php';
 include 'halpers/formet.php';
+
+
 spl_autoload_register(function ($classes) {
     include_once "classes/" . $classes . ".php";
 });
 $db = new database();
 $fm = new Format();
+$contact_message_class = new Contactmessage();
+$Slider_class = new Slider();
+$services_class = new Service();
+$setting = new defaultSettings();
+$data = $setting->showById(null);
+$default_settings_items = $data->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Fancy wings</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- style links -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="shortcut icon" href="./Admin/assets/img/fav.jpg" type="image/x-icon">
+    <!DOCTYPE html>
+    <html dir="ltr" lang="en-US">
 
-    <link href="assets/css/hover-min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- icon cdn -->
-    <!-- boxicon cdn -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <!-- external style -->
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="author" content="SemiColonWeb" />
+        <!-- Stylesheets
+	============================================= -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap" rel="stylesheet" type="text/css" />
 
-<body>
-    <header>
-        <!--navigation bar-->
-        <nav class="navbar nav-bar-expand-lg fixed-top py-3">
-            <!--logo-->
-            <h3 class="pl-3">
-                <a href="index.php" class="nav-brand logo">𓂀 𝐹𝒶𝓃𝒸𝓎<span> 𝒲𝒾𝓃𝑔𝓈 𓂀</span></a>
-            </h3>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#">
-            </button>
-            <!--nav-items-->
-            <ul>
-                <li><a class="active" href="#home">Home<i class="fa fa-fw fa-star-o"></i></a></li>
-                <li><a class="active" href="#about">About<i class="fa fa-fw fa-star-o"></i></a></li>
-                <li><a class="active" href="#feature">Feature<i class="fa fa-fw fa-star-o"></i></a></li>
-                <li><a class="active" href="#services">Services<i class="fa fa-fw fa-star-o"></i></a></li>
-                <li><a class="active" href="#contact">Contact<i class="fa fa-fw fa-star-o"></i></a></li>
-            </ul>
-            <label id="icon">
-                <i class="fas fa-bars"></i>
-            </label>
+        <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="assets/style.css" type="text/css" />
+
+        <link rel="stylesheet" href="assets/css/swiper.css" type="text/css" />
+
+
+        <link rel="stylesheet" href="assets/css/dark.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/font-icons.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/animate.css" type="text/css" />
+        <link rel="stylesheet" href="assets/css/magnific-popup.css" type="text/css" />
+
+        <link rel="stylesheet" href="assets/css/custom.css" type="text/css" />
+        <link rel="stylesheet" href="assets/my.css" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="assets/images/logo.jpg" type="image/gif" sizes="16x16">
+
+        <!-- Document Title
+	============================================= -->
+        <title><?= $default_settings_items['title'] ?></title>
+    </head>
+
+<body class="stretched">
+
+    <!-- Document Wrapper
+	============================================= -->
+    <div id="wrapper" class="clearfix">
+        <!-- Top Bar
+		============================================= -->
+        <div id="top-bar" class="py-3 text-center bg-color-light">
+            <div class="container clearfix">
+                <div class="d-md-flex justify-content-md-between align-items-md-center">
+                    <h4 class="mb-2 mb-md-0 h6 fw-normal">Free Shipping on every order <span class="mx-2 text-black-50">&middot;</span> 30 Days Return</h4>
+
+                    <h4 class="mb-0 h6 fw-normal">Need Help? Call us at <a class="color" href="tel:<?= $default_settings_items['phone'] ?>"><u class="fw-medium"><?= $default_settings_items['phone'] ?></u></a> or <a class="color" href="mailto:<?= $default_settings_items['email'] ?>"><u class="fw-medium">email</u></a> us.</h4>
+                </div>
             </div>
-        </nav>
-        <!-- Home -->
-        <section id="home">
-            <div class="container mt-5">
-                <div class="row py-4 mt-5 d-flex flex-lg-row-reverse justify-content-center">
-                    <div class="col-12 col-sm-12 col-md-10 col-lg-6 mb-5 mb-lg-0" id="person-img">
-                        <!-- Poster image -->
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-5 mt-lg-0 pt-5 pt-lg-0 detail">
-                        <h1 class="title">We are here!</h1>
-                        <h4 class="title">Fancy wings</h4>
-                        <h4 class="title">Women beauty parlour</h4>
-                    </div>
-                    <div class="media p-3">
-                        <div class="media-body ml-3">
-                            <h5 class="sub-title">-For face gloss and all unit upgrades</h5>
-                            <p>Fancy wings is the new and leading women's beauty parlour in dhaka.WE are dedicated artists and we make your body units beauty and we takes care about your skin,face...</p>
-                            <p>Are you exicated with the fluttering sound of <span>Fancy wings?</span></p>
+        </div><!-- #top-bar end -->
+        <!-- Header
+		============================================= -->
+        <header id="header" class="full-header transparent-header" data-sticky-class="not-dark">
+            <div id="header-wrap">
+                <div class="container">
+                    <div class="header-row">
+
+                        <!-- Logo
+						============================================= -->
+                        <div id="logo">
+                            <a href="index.php" class="standard-logo" data-dark-logo="assets/images/logo.jpg"><img src="<?= $default_settings_items['logo'] ?>" alt="Logo"></a>
+                            <a href="index.php" class="retina-logo" data-dark-logo="assets/images/logo.jpg"><img src="<?= $default_settings_items['logo'] ?>" alt="Logo"></a>
+                        </div><!-- #logo end -->
+                        <div class="header-misc">
+
+                            <!-- Top Search
+							============================================= -->
+                            <div id="top-search" class="header-misc-icon">
+                                <a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
+                            </div><!-- #top-search end -->
+
+                            <!-- Top Cart
+							============================================= -->
+                            <div id="top-cart" class="header-misc-icon d-none d-sm-block">
+                                <!-- <a href="#" id="top-cart-trigger"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a> -->
+                                <div class="top-cart-content">
+                                    <div class="top-cart-title">
+                                        <h4>Shopping Cart</h4>
+                                    </div>
+                                    <div class="top-cart-items">
+                                        <div class="top-cart-item">
+                                            <div class="top-cart-item-image">
+                                                <a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+                                            </div>
+                                            <div class="top-cart-item-desc">
+                                                <div class="top-cart-item-desc-title">
+                                                    <a href="#">Blue Round-Neck Tshirt with a Button</a>
+                                                    <span class="top-cart-item-price d-block">৳ 19.99</span>
+                                                </div>
+                                                <div class="top-cart-item-quantity">x 2</div>
+                                            </div>
+                                        </div>
+                                        <div class="top-cart-item">
+                                            <div class="top-cart-item-image">
+                                                <a href="#"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+                                            </div>
+                                            <div class="top-cart-item-desc">
+                                                <div class="top-cart-item-desc-title">
+                                                    <a href="#">Light Blue Denim Dress</a>
+                                                    <span class="top-cart-item-price d-block">৳ 24.99</span>
+                                                </div>
+                                                <div class="top-cart-item-quantity">x 3</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="top-cart-action">
+                                        <span class="top-checkout-price">৳ 114.95</span>
+                                        <a href="#" class="button button-3d button-small m-0">View Cart</a>
+                                    </div>
+                                </div>
+                            </div><!-- #top-cart end -->
+
                         </div>
-                        <img style="width:300px;" class="rounded-circle" src="https://jiyasbeautylounge.com/wp-content/uploads/2015/03/Makeup-Bridal1-300x300.jpg" alt="">
+
+                        <div id="primary-menu-trigger">
+                            <svg class="svg-trigger" viewBox="0 0 100 100">
+                                <path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path>
+                                <path d="m 30,50 h 40"></path>
+                                <path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Primary Navigation
+						============================================= -->
+                        <nav class="primary-menu">
+
+                            <ul class="menu-container">
+                                <li class="menu-item">
+                                    <a class="menu-link" href="index.php">
+                                        <div>Home</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="about.php">
+                                        <div>About</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="gallerie.php">
+                                        <div>Galleries</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="contact.php">
+                                        <div>Contact</div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </nav><!-- #primary-menu end -->
+
+                        <form class="top-search-form" action="search.html" method="get">
+                            <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
+                        </form>
+
                     </div>
                 </div>
-                <!-- <div class="input-group col-12 col-sm-10 col-md-8 col-lg-10 col-xl-9">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger explore rounded-right">
-                            Explore
-                        </button>
-                    </div>
-                </div> -->
-                <!-- icon -->
-                <?php
-                $database = mysqli_connect('localhost', 'root', '', 'parlor');
-                $quary = "SELECT * FROM default_setting where id = 1";
-                $quaryData = mysqli_query($database, $quary);
-                if (mysqli_num_rows($quaryData) > 0) {
-                    foreach ($quaryData as $item) {
-                ?>
-                        <div class="social-media">
-                            <ul class="d-flex pt-4">
-                                <li class="mr-4"><i class="bx bxs-right-arrow bx-fade-left"></i></li>
-                                <li class="mr-4"><a href="http://<?= $item['instagram'] ?>" target="_blank" rel="noopener noreferrer"><i class="bx bxl-instagram-alt"></a></i></li>
-                                <li class="mr-4"><a href="http://<?= $item['fb'] ?>" target="_blank" rel="noopener noreferrer"><i class="bx bxl-facebook-circle"></a></i></li>
-                                <li class="mr-4"><a href="http://<?= $item['twitter'] ?>" target="_blank" rel="noopener noreferrer"><i class="bx bxl-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                <?php
-                    }
-                }
-                ?>
             </div>
-            </div>
-            </div>
-        </section>
-    </header>
+            <div class="header-wrap-clone"></div>
+        </header><!-- #header end -->

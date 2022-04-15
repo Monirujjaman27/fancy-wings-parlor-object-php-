@@ -1,11 +1,11 @@
 <?php include "inc/header.php"; ?>
 <?php include 'inc/left-sidebar.php'; ?>
-<?php include '../classes/contactMessage.php'; ?>
+<?php include '../classes/Contactmessage.php'; ?>
 
 
 <div class="col-sm-10">
     <div class="card border-dark mh-600">
-        <h1 class="mb-0 alert alert-info"><strong>All Contact Messages</strong></h1>
+        <h6 class="mb-0 alert alert-info"><strong>Messages</strong></h1>
         <?php
         $cat = new ContactMessage();
         if (isset($_GET['delid'])) {
@@ -24,14 +24,14 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Message Body</th>
+                        <th>Message</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $sowcat = new ContactMessage();
+                    $sowcat = new Contactmessage();
                     $getcat = $sowcat->showMessage();
                     $i = 0;
                     if ($getcat) {
